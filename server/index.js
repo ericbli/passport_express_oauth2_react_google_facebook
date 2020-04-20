@@ -28,10 +28,10 @@ passport.deserializeUser((user, cb) => {
 
 // Facebook Strategy
 passport.use(new FacebookStrategy({
-        clientID: keys.FACEBOOK.clientID,
-        clientSecret: keys.FACEBOOK.clientSecret,
-        callbackURL: "/auth/facebook/callback"
-    },
+    clientID: keys.FACEBOOK.clientID,
+    clientSecret: keys.FACEBOOK.clientSecret,
+    callbackURL: "/auth/facebook/callback"
+},
     (accessToken, refreshToken, profile, cb) => {
         console.log(chalk.blue(JSON.stringify(profile)));
         user = { ...profile };
@@ -40,10 +40,10 @@ passport.use(new FacebookStrategy({
 
 // Amazon Strategy
 passport.use(new AmazonStrategy({
-        clientID: keys.AMAZON.clientID,
-        clientSecret: keys.AMAZON.clientSecret,
-        callbackURL: "/auth/amazon/callback"
-    },
+    clientID: keys.AMAZON.clientID,
+    clientSecret: keys.AMAZON.clientSecret,
+    callbackURL: "/auth/amazon/callback"
+},
     (accessToken, refreshToken, profile, cb) => {
         console.log(chalk.blue(JSON.stringify(profile)));
         user = { ...profile };
@@ -52,10 +52,10 @@ passport.use(new AmazonStrategy({
 
 // Github Strategy
 passport.use(new GithubStrategy({
-        clientID: keys.GITHUB.clientID,
-        clientSecret: keys.GITHUB.clientSecret,
-        callbackURL: "/auth/github/callback"
-    },
+    clientID: keys.GITHUB.clientID,
+    clientSecret: keys.GITHUB.clientSecret,
+    callbackURL: "/auth/github/callback"
+},
     (accessToken, refreshToken, profile, cb) => {
         console.log(chalk.blue(JSON.stringify(profile)));
         user = { ...profile };
@@ -64,10 +64,10 @@ passport.use(new GithubStrategy({
 
 // Google Strategy
 passport.use(new GoogleStrategy({
-        clientID: keys.GOOGLE.clientID,
-        clientSecret: keys.GOOGLE.clientSecret,
-        callbackURL: "/auth/google/callback"
-    },
+    clientID: keys.GOOGLE.clientID,
+    clientSecret: keys.GOOGLE.clientSecret,
+    callbackURL: "/auth/google/callback"
+},
     (accessToken, refreshToken, profile, cb) => {
         console.log(chalk.blue(JSON.stringify(profile)));
         user = { ...profile };
@@ -76,10 +76,10 @@ passport.use(new GoogleStrategy({
 
 // Instagram Strategy
 passport.use(new InstagramStrategy({
-        clientID: keys.INSTAGRAM.clientID,
-        clientSecret: keys.INSTAGRAM.clientSecret,
-        callbackURL: "/auth/instagram/callback"
-    },
+    clientID: keys.INSTAGRAM.clientID,
+    clientSecret: keys.INSTAGRAM.clientSecret,
+    callbackURL: "/auth/instagram/callback"
+},
     (accessToken, refreshToken, profile, cb) => {
         console.log(chalk.blue(JSON.stringify(profile)));
         user = { ...profile };
@@ -88,10 +88,10 @@ passport.use(new InstagramStrategy({
 
 // Spotify Strategy
 passport.use(new SpotifyStrategy({
-        clientID: keys.SPOTIFY.clientID,
-        clientSecret: keys.SPOTIFY.clientSecret,
-        callbackURL: "/auth/spotify/callback"
-    },
+    clientID: keys.SPOTIFY.clientID,
+    clientSecret: keys.SPOTIFY.clientSecret,
+    callbackURL: "/auth/spotify/callback"
+},
     (accessToken, refreshToken, profile, cb) => {
         console.log(chalk.blue(JSON.stringify(profile)));
         user = { ...profile };
@@ -100,10 +100,10 @@ passport.use(new SpotifyStrategy({
 
 // Twitch Strategy
 passport.use(new TwitchStrategy({
-        clientID: keys.TWITCH.clientID,
-        clientSecret: keys.TWITCH.clientSecret,
-        callbackURL: "/auth/twitch/callback"
-    },
+    clientID: keys.TWITCH.clientID,
+    clientSecret: keys.TWITCH.clientSecret,
+    callbackURL: "/auth/twitch/callback"
+},
     (accessToken, refreshToken, profile, cb) => {
         console.log(chalk.blue(JSON.stringify(profile)));
         user = { ...profile };
@@ -142,30 +142,30 @@ app.get("/auth/google", passport.authenticate("google", {
 }));
 app.get("/auth/google/callback",
     passport.authenticate("google"),
-        (req, res) => {
-            res.redirect("/profile");
-        });
+    (req, res) => {
+        res.redirect("/profile");
+    });
 
 app.get("/auth/instagram", passport.authenticate("instagram"));
 app.get("/auth/instagram/callback",
     passport.authenticate("instagram"),
-        (req, res) => {
-            res.redirect("/profile");
-        });
+    (req, res) => {
+        res.redirect("/profile");
+    });
 
 app.get("/auth/spotify", passport.authenticate("spotify"));
 app.get("/auth/spotify/callback",
     passport.authenticate("spotify"),
-        (req, res) => {
-            res.redirect("/profile");
-        });
+    (req, res) => {
+        res.redirect("/profile");
+    });
 
 app.get("/auth/twitch", passport.authenticate("twitch.js"));
 app.get("/auth/twitch/callback",
     passport.authenticate("twitch.js"),
-        (req, res) => {
-            res.redirect("/profile");
-        });
+    (req, res) => {
+        res.redirect("/profile");
+    });
 
 app.get("/user", (req, res) => {
     console.log("getting user data!");
@@ -178,30 +178,36 @@ app.get("/auth/logout", (req, res) => {
     res.redirect("/");
 });
 
-if (process.env.NODE_ENV === "production") {
-    app.use(express.static(path.join(__dirname, '../client/build')));
-    app.get('/', function(req, res) {
-        res.sendFile(path.join(__dirname, 'build', 'index.html'));
-    });
-}
+// if (process.env.NODE_ENV === "production") {
+//     app.use(express.static(path.join(__dirname, '../client/build')));
+//     app.get('/', function (req, res) {
+//         res.sendFile(path.join(__dirname, 'build', 'index.html'));
+//     });
+// }
 
-if (process.env.NODE_ENV === "production") {
-    const privateKey = fs.readFileSync('/etc/letsencrypt/live/learnpassportjs.com/privkey.pem', 'utf8');
-    const certificate = fs.readFileSync('/etc/letsencrypt/live/learnpassportjs.com/cert.pem', 'utf8');
-    const ca = fs.readFileSync('/etc/letsencrypt/live/learnpassportjs.com/chain.pem', 'utf8');
-    const credentials = {
-        key: privateKey,
-        cert: certificate,
-        ca: ca
-    };
+// if (process.env.NODE_ENV === "production") {
+//     const privateKey = fs.readFileSync('/etc/letsencrypt/live/learnpassportjs.com/privkey.pem', 'utf8');
+//     const certificate = fs.readFileSync('/etc/letsencrypt/live/learnpassportjs.com/cert.pem', 'utf8');
+//     const ca = fs.readFileSync('/etc/letsencrypt/live/learnpassportjs.com/chain.pem', 'utf8');
+//     const credentials = {
+//         key: privateKey,
+//         cert: certificate,
+//         ca: ca
+//     };
 
-    https.createServer(credentials, app).listen(443, () => {
-        console.log('HTTPS Server running on port 443');
-    });
-    http.createServer(function (req, res) {
-        res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
-        res.end();
-    }).listen(80);
-} else if (process.env.NODE_ENV === "development") {
-    app.listen(5000);
-}
+//     https.createServer(credentials, app).listen(443, () => {
+//         console.log('HTTPS Server running on port 443');
+//     });
+//     http.createServer(function (req, res) {
+//         res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
+//         res.end();
+//     }).listen(80);
+// } else if (process.env.NODE_ENV === "development") {
+//     const port = process.env.PORT || 5000;
+
+//     app.listen(port, () => console.log(`Server started on port ${port}`));
+// }
+
+const port = process.env.PORT || 5000;
+
+app.listen(port, () => console.log(`Server started on port ${port}`));
