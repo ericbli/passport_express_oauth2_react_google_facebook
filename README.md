@@ -9,6 +9,8 @@ Login with your account and explore your data in the Mac terminal inspired UI!
 
 ## How to Run
 
-> npm run dev
+npm run server   (start server)
+cd /client
+npm run start   (start react)
 
 Navigate to http://localhost:3000 
